@@ -1,0 +1,36 @@
+datasource_config:
+    name: your_data_source # Enter a datasource name
+    class_name: Datasource
+    execution_engine:
+        class_name: SparkDFExecutionEngine
+    data_connectors:
+        default_runtime_data_connector_name:
+            class_name: RuntimeDataConnector
+            batch_identifiers:
+                - default_identifier_name
+
+batch_request_config:
+    data_asset_name: your_data_source_data # Enter a data asset name
+
+expectation_suite_config:
+    expectation_suite_name: your_data_source_suite # Enter an expectation suite name
+
+expectations:
+    - expectation_type: expect_column_values_to_not_be_null
+      kwargs:
+          - column: cust_id
+          - column: product
+          - column: probability
+
+    - expectation_type: expect_column_values_to_be_between
+      kwargs:
+          - column: probability
+            min_value: 0.0
+            max_value: 1.0
+            
+    - expectation_type: expect_column_values_to_be_in_set
+      kwargs:
+          - column: product_family
+            value_set:
+              - FOOD
+              - BOOKS
