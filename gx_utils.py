@@ -7,7 +7,7 @@ from great_expectations.core import ExpectationConfiguration
 
 
 def run_great_expectations(data, config_path, verbose=False):
-    """Run Great Expectations expectation suite on Spark DataFrame from the lake
+    """Run Great Expectations expectation suite from input YAML file
 
     Args:
         config_path (str): YAML configuration path
